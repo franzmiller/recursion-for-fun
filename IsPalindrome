@@ -1,0 +1,35 @@
+import string
+
+""" Returns True if s is a palindrome. 
+    Ignores punctuation, upper/lower case, and spacing. 
+    Uses recursion (yay). """
+def isPal(s):
+    # Remove spaces
+    s = s.replace(" ", "")
+    s = s.lower()
+    
+    """ Remove all punctuation characters. 
+        Learned how to remove punctuation from datagy.io/python-remove-punctuation-from-string/
+        The str.translate() function uses a translation table created by the str.maketrans() function.
+        This translation table tells translate() what strings to replace, what to replace them with, and which strings to remove.
+        By having empty strings as the first 2 params, no strings are replaced. 
+        Using the string.punctuation attribute as the 3rd param removes all punctuation characters. """
+    s = s.translate(str.maketrans("", "", string.punctuation))
+
+    length = len(s)
+    if length <= 1:
+        return True
+    if s[0] == s[length - 1]:
+        return isPal(s[1:length - 1])
+    else:
+        return False
+
+
+def main():
+    phrase = input("Enter a phrase and I will check if it is a palindrome(-1 to quit): ")
+    while phrase != "-1":
+        if isPal(phrase) and phrase != "-1":
+            print("This is a palindrome!")
+        elif phrase != "-1":
+            print("This is not a palindrome.")
+        phrase = input("Enter a phrase and I will check if it is a palindrome(-1 to quit): ")
