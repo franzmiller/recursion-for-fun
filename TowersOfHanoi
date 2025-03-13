@@ -1,0 +1,23 @@
+def main():
+    n = input("Enter number of disks: ")
+    moveDisk(int(n), "A", "B", "C")
+
+"""
+    Recursive function to move a disk from a start peg to a destination peg,
+    with a designated spare peg. I had to use a generalized algorithm from:
+    https://www.khanacademy.org/computing/computer-science/algorithms/towers-of-hanoi/a/towers-of-hanoi-continued
+"""
+def moveDisk(n, start, dest, spare):
+    # Base case. Move top disk to destination.
+    if n == 1:
+        print("Disk 1 to peg " + dest)
+    elif n >= 2:
+        # Recursively move disks 1 through n - 1 from start peg to spare peg.
+        moveDisk(n - 1, start, spare, dest)
+        # Move the bottom disk(disk n) to destination peg.
+        print("Disk " + str(n) + " to peg " + dest)
+        # Recursively move disk 1 through n - 1from spare peg to destination peg.
+        moveDisk(n - 1, spare, dest, start)
+
+
+main()
